@@ -1,4 +1,4 @@
-package core;
+package persistance;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,6 +14,13 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import core.Affiliation;
+import core.Ecole;
+import core.Filiere;
+import core.Personne;
+import core.Propriete;
+import core.Salle;
+
 import persistance.Persistance;
 
 import datanucleusTutorial.core.User;
@@ -23,8 +30,6 @@ import datanucleusTutorial.core.User;
 *
 * @author Mohamed MEDARHRI
 */
-
-
 
 public class JDOHbase
 {
@@ -108,6 +113,154 @@ public class JDOHbase
 		
 	}
 	
+	
+	// Persistence ecole
+	public void persisterEcole(Ecole ecole) {
+		pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        int i;
+        try
+        {
+        	tx.begin();
+            System.out.println("Persisting Ecole "+ecole.getSite());
+            for(i=0;i<ecole.getFilieres().size();i++)
+            {
+            pm.makePersistent(ecole.getFilieres().get(i));
+            
+            }
+            pm.makePersistent(ecole);
+          
+            tx.commit();
+            System.out.println(ecole.getSite()+" have been persisted");
+        }catch(Exception e)
+        {
+        	System.out.println("Error in persisterEcole() "+e.toString());
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+            	tx.rollback();
+            }
+            pm.close();
+        }
+        System.out.println("");
+		
+	}
+	
+	
+	
+	
+	// Persistence Personne
+	public void persisterPersonne(Personne pers) {
+		pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        int i;
+        try
+        {
+        	tx.begin();
+          System.out.println("Persisting Personne "+pers.toString());
+          /*
+          for(i=0;i<ecole.getFilieres().size();i++)
+            {
+            pm.makePersistent(ecole.getFilieres().get(i));
+            
+            }
+            */
+            pm.makePersistent(pers);
+          
+            tx.commit();
+            System.out.println(pers.toString()+" have been persisted");
+        }catch(Exception e)
+        {
+        	System.out.println("Error in persisterPersonne() "+e.toString());
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+            	tx.rollback();
+            }
+            pm.close();
+        }
+        System.out.println("");
+		
+	}
+	
+	
+	
+	// Persistence Propriete
+	public void persisterPropriete(Propriete propriete) {
+		pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        int i;
+        try
+        {
+        	tx.begin();
+          System.out.println("Persisting Ecole "+propriete.toString());
+          /*
+          for(i=0;i<ecole.getFilieres().size();i++)
+            {
+            pm.makePersistent(ecole.getFilieres().get(i));
+            
+            }
+            */
+            pm.makePersistent(propriete);
+          
+            tx.commit();
+            System.out.println(propriete.toString()+" have been persisted");
+        }catch(Exception e)
+        {
+        	System.out.println("Error in persisterPropriete() "+e.toString());
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+            	tx.rollback();
+            }
+            pm.close();
+        }
+        System.out.println("");
+		
+	}
+	
+	
+	// Persistence Salle
+	public void persisterSalle(Salle salle) {
+		pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        int i;
+        try
+        {
+        	tx.begin();
+            System.out.println("Persisting Salle "+salle.toString());
+           /* for(i=0;i<salle.getd.size();i++)
+            {
+            pm.makePersistent(ecole.getFilieres().get(i));
+            
+            }
+            */
+            pm.makePersistent(salle);
+          
+            tx.commit();
+            System.out.println(salle.toString()+" have been persisted");
+        }catch(Exception e)
+        {
+        	System.out.println("Error in persisterSalle() "+e.toString());
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+            	tx.rollback();
+            }
+            pm.close();
+        }
+        System.out.println("");
+		
+	}
+	
 	  // Basic Extent of all user
 	
 	public void getExtent(Object obj)
@@ -148,7 +301,7 @@ public class JDOHbase
     System.out.println("");
 }
 	
-	
+	//vide la table User
 	public void cleanOutUser()
 	{
 		pm = pmf.getPersistenceManager();
@@ -188,6 +341,96 @@ public class JDOHbase
         }
         System.out.println("");
 	}
+	
+	//vide la table Filiere
+	public void cleanOutFiliere()
+	{
+		pm = pmf.getPersistenceManager();
+        tx = pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            System.out.println("Supression de toutes les Filieres ");
+            @SuppressWarnings("rawtypes")
+			Extent e=pm.getExtent(Filiere.class,true);
+            Query query=pm.newQuery(e);
+            //Query query = pm.newQuery("javax.jdo.query.JDOQL", "SELECT FROM datanucleusTutorial.core.User WHERE login == 'ff'");         
+            @SuppressWarnings("rawtypes")
+			Collection c=(Collection)query.execute();
+           // System.out.println("collection is empty : "+c.isEmpty());
+            @SuppressWarnings("rawtypes")
+			Iterator iter=c.iterator();
+            while (iter.hasNext())
+            {
+             Filiere filiere = (Filiere)iter.next();
+             query.deletePersistentAll(filiere);
+                
+            }
+
+            tx.commit();
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+        System.out.println("");
+	}
+	
+	//cleanout Ecole table
+	public void cleanOutEcole()
+	{
+		pm = pmf.getPersistenceManager();
+        tx = pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            System.out.println("Supression de toutes les Ecoles ");
+            @SuppressWarnings("rawtypes")
+			Extent ecoles=pm.getExtent(Ecole.class,true);
+            Extent filieres=pm.getExtent(Filiere.class,true);
+            Query query_ecoles=pm.newQuery(ecoles);
+            Query query_filieres=pm.newQuery(filieres);
+            //Query query = pm.newQuery("javax.jdo.query.JDOQL", "SELECT FROM datanucleusTutorial.core.User WHERE login == 'ff'");
+          
+            @SuppressWarnings("rawtypes")
+			Collection c=(Collection)query_ecoles.execute();
+            //Collection c1=(Collection)query_filieres.execute();
+           // System.out.println("collection is empty : "+c.isEmpty());
+            @SuppressWarnings("rawtypes")
+			Iterator iter=c.iterator();
+            //Iterator iter1=c1.iterator();
+            while (iter.hasNext())
+            {
+             Ecole ecole = (Ecole)iter.next();
+             query_ecoles.deletePersistentAll(ecole);               
+            }
+           /* while (iter1.hasNext())
+            {
+             Filiere filere = (Filiere)iter.next();
+             query_filieres.deletePersistentAll(filere);
+            
+                
+            }
+			*/
+            
+            tx.commit();
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+        System.out.println("");
+	}
+	
+	
 	public void deleteUserByLogin(String login)
 	{
 		pm = pmf.getPersistenceManager();
@@ -212,16 +455,7 @@ public class JDOHbase
             {
              User user = (User)iter.next();
              query.deletePersistentAll(user);
-                
-
-              /*  // Give an example of an update
-                if (user instanceof User)
-                {
-                	User b = (User)obj;
-                    System.out.println("Login "+b.getLogin());
-                }
-            */
-            }
+             }
 
             tx.commit();
         }
@@ -451,19 +685,50 @@ public class JDOHbase
 		User user1= new User("ff", password, User.AUDITOR);
 		User user2= new User("ts", password, User.SCHOOL_DIRECTION);
 		User user3= new User("sd", password, User.STUDENT);
+		
+
+		Ecole werner = new Ecole(Ecole.Ensisa_Werner,Ecole.Adresse_Ensisa_Werner);
+		Ecole lumiere = new Ecole(Ecole.Ensisa_Lumiere,Ecole.Adresse_Ensisa_Lumiere);
+		Filiere ir = new Filiere(Filiere.IR);
+		Filiere sis = new Filiere(Filiere.SIS);
+		Filiere mec = new Filiere(Filiere.Mecanique);
+		
+		Propriete propriete = new Propriete(Propriete.Mademoiselle,
+				"Ben", "Hanae", "b.hanae@gmail.com", "0617119650");
+		Affiliation affiliation = new Ecole(Ecole.Ensisa_Lumiere,
+				Ecole.Adresse_Ensisa_Lumiere);
+	
+
+		Salle salle1 = new Salle(Salle.sites.Lumiere.name(),
+		Salle.numeros.E25.name(), Salle.floors.First.name());
+		Salle salle2 = new Salle(Salle.sites.Lumiere.name(),
+		Salle.numeros.E23.name(), Salle.floors.First.name());
+		
+		Personne p1 = new Personne(propriete, affiliation);
+
     	
 	/*	jdohb.persister(user);
     	jdohb.persister(user1);
     	jdohb.persister(user2);
     	jdohb.persister(user3);
     	*/
-		
     	//jdohb.getExtent(user);
     	//jdohb.updatePassword("ts","new_password");
-    	jdohb.getUserByLogin("ts");
-        jdohb.deleteUserByLogin("ff");
+    	//jdohb.getUserByLogin("ts");
+        //jdohb.deleteUserByLogin("ff");
     	//jdohb.cleanOutUser();
-        
- 
+        //jdohb.cleanOutEcole();
+		//jdohb.persisterEcole(werner);
+		//jdohb.persisterEcole(lumiere);
+		//jdohb.getExtent(werner);
+		//jdohb.getExtent(lumiere); 
+		/*jdohb.persister(ir);
+		jdohb.persister(sis);
+		jdohb.persister(mec);
+		*/
+		//jdohb.cleanOutFiliere();
+		//jdohb.persisterSalle(salle1);
+		//jdohb.persisterPropriete(propriete);
+		jdohb.persisterPersonne(p1);
     }
 }
