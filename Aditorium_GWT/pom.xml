@@ -1,0 +1,123 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.company</groupId>
+	<artifactId>parent</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>parent</name>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>gwt-maven-plugins</id>
+			<url>
+				http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/
+			</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<repositories>
+		<repository>
+			<id>gwt-maven</id>
+			<url>
+				http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/
+			</url>
+		</repository>
+		<repository>
+			<id>for-gwt-incubator</id>
+			<url>
+				http://dist.codehaus.org/mule/dependencies/maven2/
+			</url>
+		</repository>
+	</repositories>
+
+	<properties>
+		<gwt.version>1.6.4</gwt.version>
+
+		<!-- tell the compiler we can use 1.5 -->
+		<maven.compiler.source>1.5</maven.compiler.source>
+		<maven.compiler.target>1.5</maven.compiler.target>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.company</groupId>
+				<artifactId>web</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.company</groupId>
+				<artifactId>server</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+
+		<!-- test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>GWT_Designer</groupId>
+			<artifactId>GWT_Designer</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt</artifactId>
+			<version>2.1.1-rc1</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.gwt-widget</groupId>
+			<artifactId>gwt-widgets</artifactId>
+			<version>0.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.mahout.hbase</groupId>
+			<artifactId>hbase</artifactId>
+			<version>0.20.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>gwt-maven-plugin</artifactId>
+			<version>2.1.0-1</version>
+			<type>maven-plugin</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.sf.jxls</groupId>
+			<artifactId>jxls</artifactId>
+			<version>1.0-RC-1</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+
+	<modules>
+	</modules>
+
+	<build>
+		<plugins>
+			<!-- Needed in my environment to specify a working version of this plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
+		</plugins>
+	</build>
+</project>
