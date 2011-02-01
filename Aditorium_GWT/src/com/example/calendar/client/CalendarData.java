@@ -3,12 +3,10 @@ package com.example.calendar.client;
 import java.util.Date;
 import java.util.Map;
 
-import org.apache.hadoop.hbase.client.HTable;
 
 import com.ensisa.login.client.MyService;
 import com.ensisa.login.client.MyServiceAsync;
 import com.ensisa.login.client.User;
-import com.ensisa.login.server.HBaseConnector;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;

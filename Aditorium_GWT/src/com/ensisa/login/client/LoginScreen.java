@@ -134,7 +134,7 @@ public class LoginScreen extends Composite {
 	           
 	           if (user != null) {
 	               setErrorText("");
-	               System.out.println(user.getUserName());
+	               System.out.println(user.getLogin());
 	           
 	               // The user is authenticated, Set the home screen
 	                Login.get().setHomeScreen(user);

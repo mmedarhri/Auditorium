@@ -14,6 +14,13 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.user.client.ui.Hyperlink;
+import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.Frame;
+import com.google.gwt.user.client.ui.MenuItem;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.ui.MenuItemSeparator;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -68,15 +75,15 @@ public class HomeScreenAdmin extends Composite {
 		rootPanel.setStyleName("gwt-RichTextToolbar .gwt-ToggleButton-down");
 		rootPanel.setStylePrimaryName("body");
 		
-		Label lblHome = new Label("Home !");
-		lblHome.setStyleName("h1");
-		rootPanel.add(lblHome, 10, 44);
-		
 		Label lblAuditorium = new Label("Auditorium ");
 		rootPanel.add(lblAuditorium, 214, 10);
 		lblAuditorium.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		lblAuditorium.setStyleName("gwt-RichTextToolbar-new");
 		lblAuditorium.setSize("231px", "40px");
+		
+		Hyperlink hyperlink = new Hyperlink("Home !", false, "newHistoryToken");
+		rootPanel.add(hyperlink, 10, 56);
+		hyperlink.setSize("42px", "15px");
 		
 		FlexTable flexTable = new FlexTable();
 		rootPanel.add(flexTable, 490, 10);
@@ -113,84 +120,42 @@ public class HomeScreenAdmin extends Composite {
 		flexTable.getCellFormatter().setHorizontalAlignment(1, 1, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setVerticalAlignment(1, 1, HasVerticalAlignment.ALIGN_BOTTOM);
 		
-		VerticalPanel verticalPanel = new VerticalPanel();
-		verticalPanel.setBorderWidth(2);
-		rootPanel.add(verticalPanel, 10, 65);
-		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		verticalPanel.setTitle("Liens");
-		verticalPanel.setStylePrimaryName("gwt-DialogBox");
-		verticalPanel.setStyleName("gwt-DisclosurePanel .header");
-		verticalPanel.setSize("130px", "317px");
+		AbsolutePanel absolutePanel = new AbsolutePanel();
+		rootPanel.add(absolutePanel, 10, 85);
+		absolutePanel.setSize("195px", "21px");
 		
-		Button buttonCalendrier = new Button("Button Calendrier");
-		buttonCalendrier.setSize("83", "36px");
-		buttonCalendrier.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				Window.alert("Calendrier cliked");
-				}
-		});
-		buttonCalendrier.setText("Calendrier");
-		verticalPanel.add(buttonCalendrier);
-		verticalPanel.setCellVerticalAlignment(buttonCalendrier, HasVerticalAlignment.ALIGN_MIDDLE);
-		verticalPanel.setCellHorizontalAlignment(buttonCalendrier, HasHorizontalAlignment.ALIGN_CENTER);
+		MenuBar menuBar = new MenuBar(false);
+		menuBar.setTitle("TEST");
+		absolutePanel.add(menuBar, 0, 0);
+		MenuBar menuBar_3 = new MenuBar(true);
 		
-		Button btnJury = new Button("Jury");
-		btnJury.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				Window.alert("Jury cliked");
-			    jury= new Jury();	
-			    jury.onModuleLoad();
-			}
-		});
-		verticalPanel.add(btnJury);
-		btnJury.setSize("83px", "36px");
-		verticalPanel.setCellVerticalAlignment(btnJury, HasVerticalAlignment.ALIGN_MIDDLE);
-		verticalPanel.setCellHorizontalAlignment(btnJury, HasHorizontalAlignment.ALIGN_CENTER);
+		MenuItem menuItem = new MenuItem("Session", false, menuBar_3);
 		
-		Button buttonSalles = new Button("Salles");
-		buttonSalles.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				Window.alert("Salles cliked");
-			}
-		});
-		verticalPanel.add(buttonSalles);
-		buttonSalles.setSize("83px", "36px");
-		verticalPanel.setCellVerticalAlignment(buttonSalles, HasVerticalAlignment.ALIGN_MIDDLE);
-		verticalPanel.setCellHorizontalAlignment(buttonSalles, HasHorizontalAlignment.ALIGN_CENTER);
+		MenuItem menuItem_3 = new MenuItem("Creer une session", false, (Command) null);
+		menuBar_3.addItem(menuItem_3);
+		menuBar.addItem(menuItem);
 		
-		Button buttonStatistiques = new Button("Statistiques");
-		buttonStatistiques.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				statistiques= new Statistiques();
-				statistiques.onModuleLoad();
-			}
-		});
-		verticalPanel.add(buttonStatistiques);
-		buttonStatistiques.setSize("83px", "36px");
-		verticalPanel.setCellVerticalAlignment(buttonStatistiques, HasVerticalAlignment.ALIGN_MIDDLE);
-		verticalPanel.setCellHorizontalAlignment(buttonStatistiques, HasHorizontalAlignment.ALIGN_CENTER);
+		MenuBar menuBar_1 = new MenuBar(false);
+		absolutePanel.add(menuBar_1, 146, 0);
+		MenuBar menuBar_4 = new MenuBar(true);
 		
-		Button buttonCandidats = new Button("Candidats");
-		buttonCandidats.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				Window.alert("Candidats cliked");
-			}
-		});
-		verticalPanel.add(buttonCandidats);
-		buttonCandidats.setSize("83px", "36px");
-		verticalPanel.setCellHorizontalAlignment(buttonCandidats, HasHorizontalAlignment.ALIGN_CENTER);
-		verticalPanel.setCellVerticalAlignment(buttonCandidats, HasVerticalAlignment.ALIGN_MIDDLE);
+		MenuItem menuItem_1 = new MenuItem("Auditions", false, menuBar_4);
 		
-		Button buttonBDD = new Button("BDD Manager");
-		buttonBDD.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				Window.alert("BDD Manager cliked");
-			}
-		});
-		verticalPanel.add(buttonBDD);
-		buttonBDD.setSize("83px", "34px");
-		verticalPanel.setCellVerticalAlignment(buttonBDD, HasVerticalAlignment.ALIGN_MIDDLE);
-		verticalPanel.setCellHorizontalAlignment(buttonBDD, HasHorizontalAlignment.ALIGN_CENTER);
+		MenuItem menuItem_4 = new MenuItem("Creer une audition", false, (Command) null);
+		menuBar_4.addItem(menuItem_4);
+		
+		MenuItemSeparator separator = new MenuItemSeparator();
+		menuBar_4.addSeparator(separator);
+		
+		MenuItem menuItem_5 = new MenuItem("Liste des auditions", false, (Command) null);
+		menuBar_4.addItem(menuItem_5);
+		
+		MenuItemSeparator separator_1 = new MenuItemSeparator();
+		menuBar_4.addSeparator(separator_1);
+		
+		MenuItem menuItem_6 = new MenuItem("Modifier une audition", false, (Command) null);
+		menuBar_4.addItem(menuItem_6);
+		menuBar_1.addItem(menuItem_1);
 		
 		DateBox dateBox = new DateBox();
 		rootPanel.add(dateBox, 494, 65);

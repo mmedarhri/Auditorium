@@ -13,6 +13,11 @@ public class Login implements EntryPoint {
 	 */
 
 	private static Login singleton;
+	private LoginScreen scrLogin;
+	private HomeScreenAdmin homeScreenAdmin;
+	private HomeScreenSuperAdmin homeScreensuperAdmin;
+	private HomeScreenAuditeur homeScreenAuditeur;
+	private HomeScreenCandidat homeScreenCandidat;
 
     public static Login get() {
 	return singleton;
@@ -29,7 +34,7 @@ public class Login implements EntryPoint {
    
     private void setLoginScreen()	{
         //Create the Login screen
-        LoginScreen scrLogin=new LoginScreen();
+        scrLogin=new LoginScreen();
         //Attach it to the root panel
         RootPanel.get().add(scrLogin);
     }
@@ -42,23 +47,23 @@ public class Login implements EntryPoint {
      public void setHomeScreen(User user)    {
        
     	 System.out.println("Home screen of "+user.getRole());
-    	 if(user.getRole().equalsIgnoreCase("super-admin"))
+    	 if(user.getRole().equalsIgnoreCase(User.SYSADMIN))
     	 {
-    		 HomeScreenSuperAdmin homeScreen =new HomeScreenSuperAdmin(user.getUserName(),user.getRole());
+    		  homeScreensuperAdmin =new HomeScreenSuperAdmin(user.getLogin(),user.getRole());
     		 
     	 }
-    	 if(user.getRole().equalsIgnoreCase("admin"))
+    	 if(user.getRole().equalsIgnoreCase(User.SCHOOL_DIRECTION))
     	 {
-    		 HomeScreenAdmin homeScreen=new HomeScreenAdmin(user.getUserName(),user.getRole());
+    		  homeScreenAdmin=new HomeScreenAdmin(user.getLogin(),user.getRole());
     	 }
-    	 if(user.getRole().equalsIgnoreCase("auditeur"))
+    	 if(user.getRole().equalsIgnoreCase(User.AUDITOR))
     	 {
-    		 HomeScreenAuditeur homeScreen=new HomeScreenAuditeur(user.getUserName(),user.getRole());
+    		  homeScreenAuditeur=new HomeScreenAuditeur(user.getLogin(),user.getRole());
     		 
     	 }
-    	 if(user.getRole().equalsIgnoreCase("candidat"))
+    	 if(user.getRole().equalsIgnoreCase(User.STUDENT))
     	 {
-    		 HomeScreenCandidat homeScreen=new HomeScreenCandidat(user.getUserName(),user.getRole());
+    		  homeScreenCandidat=new HomeScreenCandidat(user.getLogin(),user.getRole());
     		 
     	 }
      }

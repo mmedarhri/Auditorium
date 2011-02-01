@@ -20,6 +20,14 @@ import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.CaptionPanel;
 import com.smartgwt.client.widgets.calendar.Calendar;
 import com.smartgwt.client.widgets.DateChooser;
+import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.MenuBar;
+import com.smartgwt.client.widgets.menu.Menu;
+import com.google.gwt.user.client.ui.MenuItem;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.ui.MenuItemSeparator;
+import com.google.gwt.user.client.ui.Hyperlink;
+import com.google.gwt.user.client.ui.Frame;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -73,15 +81,74 @@ public class HomeScreenSuperAdmin extends Composite {
 		rootPanel.setStyleName("gwt-RichTextToolbar .gwt-ToggleButton-down");
 		rootPanel.setStylePrimaryName("dialogVPanel");
 		
-		Label lblHome = new Label("Home ");
-		lblHome.setStyleName("gwt-RichTextToolbar-new");
-		rootPanel.add(lblHome, 10, 27);
+		Hyperlink hyperlink = new Hyperlink("Home !", false, "newHistoryToken");
+		rootPanel.add(hyperlink, 10, 35);
 		
 		Label lblAuditorium = new Label("Auditorium ");
 		rootPanel.add(lblAuditorium, 214, 10);
 		lblAuditorium.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		lblAuditorium.setStyleName("gwt-RichTextToolbar-new");
 		lblAuditorium.setSize("231px", "40px");
+		
+		AbsolutePanel absolutePanel = new AbsolutePanel();
+		rootPanel.add(absolutePanel, 10, 64);
+		absolutePanel.setSize("360px", "21px");
+		
+		MenuBar menuBar = new MenuBar(false);
+		menuBar.setTitle("TEST");
+		absolutePanel.add(menuBar, 0, 0);
+		MenuBar menuBar_2 = new MenuBar(true);
+		
+		MenuItem menuItem_6 = new MenuItem("Session", false, menuBar_2);
+		
+		MenuItem menuItem = new MenuItem("Creer une session", false, (Command) null);
+		menuBar_2.addItem(menuItem);
+		
+		MenuItemSeparator separator_1 = new MenuItemSeparator();
+		menuBar_2.addSeparator(separator_1);
+		
+		MenuItem menuItem_7 = new MenuItem("Statistiques", false, (Command) null);
+		menuBar_2.addItem(menuItem_7);
+		menuBar.addItem(menuItem_6);
+		
+		MenuBar menuBar_1 = new MenuBar(false);
+		absolutePanel.add(menuBar_1, 146, 0);
+		MenuBar menuBar_6 = new MenuBar(true);
+		
+		MenuItem menuItem_1 = new MenuItem("Auditions", false, menuBar_6);
+		
+		MenuItem menuItem_8 = new MenuItem("Creer une audition", false, (Command) null);
+		menuBar_6.addItem(menuItem_8);
+		
+		MenuItemSeparator separator_2 = new MenuItemSeparator();
+		menuBar_6.addSeparator(separator_2);
+		
+		MenuItem menuItem_9 = new MenuItem("Liste des auditions", false, (Command) null);
+		menuBar_6.addItem(menuItem_9);
+		
+		MenuItemSeparator separator_3 = new MenuItemSeparator();
+		menuBar_6.addSeparator(separator_3);
+		
+		MenuItem menuItem_10 = new MenuItem("Modifier une audition", false, (Command) null);
+		menuBar_6.addItem(menuItem_10);
+		menuBar_1.addItem(menuItem_1);
+		
+		MenuBar menuBar_5 = new MenuBar(false);
+		absolutePanel.add(menuBar_5, 280, 0);
+		menuBar_5.setSize("80px", "19px");
+		MenuBar menuBar_4 = new MenuBar(true);
+		
+		MenuItem menuItem_2 = new MenuItem("BdD Manager", false, menuBar_4);
+		
+		MenuItem menuItem_4 = new MenuItem("Gestion des Candidats", false, (Command) null);
+		menuBar_4.addItem(menuItem_4);
+		
+		MenuItemSeparator separator = new MenuItemSeparator();
+		menuBar_4.addSeparator(separator);
+		
+		MenuItem menuItem_5 = new MenuItem("Gestion des Salles", false, (Command) null);
+		menuBar_4.addItem(menuItem_5);
+		menuBar_5.addItem(menuItem_2);
 		
 		FlexTable flexTable = new FlexTable();
 		rootPanel.add(flexTable, 490, 10);
@@ -128,84 +195,6 @@ public class HomeScreenSuperAdmin extends Composite {
 		flexTable.getCellFormatter().setVerticalAlignment(2, 1, HasVerticalAlignment.ALIGN_BOTTOM);
 		flexTable.getCellFormatter().setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_CENTER);
 		flexTable.getCellFormatter().setVerticalAlignment(1, 0, HasVerticalAlignment.ALIGN_MIDDLE);
-		
-		VerticalPanel verticalPanel = new VerticalPanel();
-		verticalPanel.setBorderWidth(2);
-		rootPanel.add(verticalPanel, 10, 65);
-		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		verticalPanel.setTitle("Liens");
-		verticalPanel.setStylePrimaryName("gwt-DialogBox");
-		verticalPanel.setStyleName("gwt-DisclosurePanel .header");
-		verticalPanel.setSize("130px", "317px");
-		
-		Button buttonCalendrier = new Button("Button Calendrier");
-		buttonCalendrier.setSize("83", "36px");
-		buttonCalendrier.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				Window.alert("Calendrier cliked");
-				}
-		});
-		buttonCalendrier.setText("Calendrier");
-		verticalPanel.add(buttonCalendrier);
-		verticalPanel.setCellVerticalAlignment(buttonCalendrier, HasVerticalAlignment.ALIGN_MIDDLE);
-		verticalPanel.setCellHorizontalAlignment(buttonCalendrier, HasHorizontalAlignment.ALIGN_CENTER);
-		
-		Button btnJury = new Button("Jury");
-		btnJury.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				Window.alert("Jury cliked");
-			    jury= new Jury();	
-			    jury.onModuleLoad();
-			}
-		});
-		verticalPanel.add(btnJury);
-		btnJury.setSize("83px", "36px");
-		verticalPanel.setCellVerticalAlignment(btnJury, HasVerticalAlignment.ALIGN_MIDDLE);
-		verticalPanel.setCellHorizontalAlignment(btnJury, HasHorizontalAlignment.ALIGN_CENTER);
-		
-		Button buttonSalles = new Button("Salles");
-		buttonSalles.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				Window.alert("Salles cliked");
-			}
-		});
-		verticalPanel.add(buttonSalles);
-		buttonSalles.setSize("83px", "36px");
-		verticalPanel.setCellVerticalAlignment(buttonSalles, HasVerticalAlignment.ALIGN_MIDDLE);
-		verticalPanel.setCellHorizontalAlignment(buttonSalles, HasHorizontalAlignment.ALIGN_CENTER);
-		
-		Button buttonStatistiques = new Button("Statistiques");
-		buttonStatistiques.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				Window.alert("Statistiques cliked");
-			}
-		});
-		verticalPanel.add(buttonStatistiques);
-		buttonStatistiques.setSize("83px", "36px");
-		verticalPanel.setCellVerticalAlignment(buttonStatistiques, HasVerticalAlignment.ALIGN_MIDDLE);
-		verticalPanel.setCellHorizontalAlignment(buttonStatistiques, HasHorizontalAlignment.ALIGN_CENTER);
-		
-		Button buttonCandidats = new Button("Candidats");
-		buttonCandidats.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				Window.alert("Candidats cliked");
-			}
-		});
-		verticalPanel.add(buttonCandidats);
-		buttonCandidats.setSize("83px", "36px");
-		verticalPanel.setCellHorizontalAlignment(buttonCandidats, HasHorizontalAlignment.ALIGN_CENTER);
-		verticalPanel.setCellVerticalAlignment(buttonCandidats, HasVerticalAlignment.ALIGN_MIDDLE);
-		
-		Button buttonBDD = new Button("BDD Manager");
-		buttonBDD.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				Window.alert("BDD Manager cliked");
-			}
-		});
-		verticalPanel.add(buttonBDD);
-		buttonBDD.setSize("81px", "39px");
-		verticalPanel.setCellVerticalAlignment(buttonBDD, HasVerticalAlignment.ALIGN_MIDDLE);
-		verticalPanel.setCellHorizontalAlignment(buttonBDD, HasHorizontalAlignment.ALIGN_CENTER);
 		
 		DateChooser dateChooser = new DateChooser();
 		rootPanel.add(dateChooser, 500, 97);
