@@ -1,12 +1,14 @@
 package utils;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Calendar;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 
+/*@authors Mohamed MEDARHRI
+ * 
+ */
 public class DateUtils {
 
  public static Calendar parseTimestamp(String timestamp)
@@ -29,14 +31,11 @@ public class DateUtils {
 
    SimpleDateFormat sdf =
           new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-   //System.out.println("Calendar : "
-    //  + sdf.format(parseTimestamp(timestampToParse).getTime()));
-   
+ 
    Date date = new Date();
    date.setHours(8);
    date.setMinutes(30);
    date.setSeconds(0);
-  // date.setTime(new Time(hour, minute, second))
    
    System.out.println(date.toLocaleString());
  }

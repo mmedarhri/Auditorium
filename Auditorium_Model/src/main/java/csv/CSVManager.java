@@ -9,7 +9,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Vector;
+
+import bdDManager.JDOHbase;
+
+import core.Personne;
+import core.Propriete;
 
 /*@authors Mohamed MEDARHRI
  * 
@@ -20,15 +26,128 @@ public class CSVManager {
    private int m_rowsCount;
    private int m_colsCount;
    private int column_numerodossier=0;
-   private int column_nom=1;
+   private int column_nom_prenom=1;
    private int column_provenance=2;
    private int column_filiere=3;
    private int column_date_audition=8;
    private int column_heure_audition=9;
    private int column_lieu_audition=11;
-   private int row_initiale=1; //contient les familles nom , prenom ...
+   private final int row_initiale=1; //contient les familles de column nom , prenom ...
+   public int getM_rowsCount() {
+	return m_rowsCount;
+}
+
+public void setM_rowsCount(int m_rowsCount) {
+	this.m_rowsCount = m_rowsCount;
+}
+
+public int getM_colsCount() {
+	return m_colsCount;
+}
+
+public void setM_colsCount(int m_colsCount) {
+	this.m_colsCount = m_colsCount;
+}
+
+public int getColumn_numerodossier() {
+	return column_numerodossier;
+}
+
+public void setColumn_numerodossier(int column_numerodossier) {
+	this.column_numerodossier = column_numerodossier;
+}
+
+public int getColumn_nom_prenom() {
+	return column_nom_prenom;
+}
+
+public void setColumn_nom_prenom(int column_nom_prenom) {
+	this.column_nom_prenom = column_nom_prenom;
+}
+
+public int getColumn_provenance() {
+	return column_provenance;
+}
+
+public void setColumn_provenance(int column_provenance) {
+	this.column_provenance = column_provenance;
+}
+
+public int getColumn_filiere() {
+	return column_filiere;
+}
+
+public void setColumn_filiere(int column_filiere) {
+	this.column_filiere = column_filiere;
+}
+
+public int getColumn_date_audition() {
+	return column_date_audition;
+}
+
+public void setColumn_date_audition(int column_date_audition) {
+	this.column_date_audition = column_date_audition;
+}
+
+public int getColumn_heure_audition() {
+	return column_heure_audition;
+}
+
+public void setColumn_heure_audition(int column_heure_audition) {
+	this.column_heure_audition = column_heure_audition;
+}
+
+public int getColumn_lieu_audition() {
+	return column_lieu_audition;
+}
+
+public void setColumn_lieu_audition(int column_lieu_audition) {
+	this.column_lieu_audition = column_lieu_audition;
+}
+
+public Propriete getPropriete() {
+	return propriete;
+}
+
+public void setPropriete(Propriete propriete) {
+	this.propriete = propriete;
+}
+
+public Personne getPersonne() {
+	return personne;
+}
+
+public void setPersonne(Personne personne) {
+	this.personne = personne;
+}
+
+public ArrayList<Personne> getPersonnes() {
+	return personnes;
+}
+
+public void setPersonnes(ArrayList<Personne> personnes) {
+	this.personnes = personnes;
+}
+
+public Vector getM_fileContent() {
+	return m_fileContent;
+}
+
+public void setM_fileContent(@SuppressWarnings("rawtypes") Vector m_fileContent) {
+	this.m_fileContent = m_fileContent;
+}
+
+public int getRow_initiale() {
+	return row_initiale;
+}
+
+private Propriete propriete;
+   private JDOHbase jdohb;
+   private Personne personne;
+   private ArrayList<Personne> personnes;
    
-   private Vector m_fileContent;
+   @SuppressWarnings("rawtypes")
+private Vector m_fileContent;
    private final static char CELL_SEPARATOR = ',';
 
    /**
@@ -36,11 +155,14 @@ public class CSVManager {
     * @param path le chemin du fichier � parser.
     * @throws FileNotFoundException si le fichier sp�cifi� n'existe pas.
     */
-   public CSVManager(File file) throws FileNotFoundException {
+   @SuppressWarnings("rawtypes")
+public CSVManager(File file) throws FileNotFoundException {
       m_fileContent = new Vector();
       FileReader fileReader = new FileReader(file.getAbsolutePath());
       readFromFile(fileReader);
       fitVectorsToSize();
+      personnes = new ArrayList<Personne>();
+      jdohb = new JDOHbase();
    }
 
    /**
@@ -207,34 +329,59 @@ public class CSVManager {
    }
 
    public String getname(int row)
+   { try{
+	   return getData(row, column_nom_prenom).split(" ")[0];
+   } catch(Exception e)
    {
-	   return getData(row, column_nom);
-	   
+	   System.out.println(e.toString());
+	   return " ";
+   }
    }
    
    public String getprenom(int row)
+   {    try{
+	   return getData(row, column_nom_prenom).split(" ")[1];
+   } catch(Exception e)
    {
-	   return getname(row).split(" ")[1];
-	   
+	   System.out.println(e.toString());
+	   return " ";
+   }
    }
    
    public String getNumeroDossier(int row)
-   {
+   { try{
 	   return getData(row,column_numerodossier);
+   } catch(Exception e)
+   {
+	   System.out.println(e.toString());
+	   return " ";
+   }
    }
    
    public String getProvenance(int row)
+   {try{
+	   return getData(row, column_provenance).split(" ")[0];
+   } catch(Exception e)
    {
-	   return getData(row, column_provenance);
+	   System.out.println(e.toString());
+	   return " ";
+   }
    }
    public String getFiliereProvenance(int row)
    {
-	   return getProvenance(row).split(" ")[1];
+	   try{
+	   return getData(row, column_provenance).split(" ")[1];
+	   } catch(Exception e)
+	   {
+		   System.out.println(e.toString());
+		   return " ";
+	   }
+	  
    }
    
    public String getFamiliesColumn_Nom()
    {
-	   return getData(row_initiale, column_nom);
+	   return getData(row_initiale, column_nom_prenom);
    }
    public String getFamiliesColumn_provenance()
    {
@@ -274,6 +421,53 @@ public class CSVManager {
    public String getSiteAudition(int row)
    {
 	   return getData(row, column_lieu_audition);
+   }
+   
+   public void addPropriete(int row)
+   {
+	   propriete= new Propriete(getname(row), getprenom(row));
+   }
+   
+   public Propriete getPropriete(int row)
+   {
+	   return propriete= new Propriete(getname(row), getprenom(row));
+	   
+   }
+   
+   public void addPersonne(int row)
+   {
+	   personne= new Personne(getPropriete(row));
+	   jdohb.persisterPersonne(personne);
+	   personnes.add(personne);
+   }
+   
+   
+   public void createAndPersitPersonnes()
+   {
+	   int i=0;
+	   
+	   for(;i<getRowsCount();i++) 
+	   {
+		   addPersonne(i);
+	   }
+   }
+   
+   public void createProprietes()
+   {
+	   int i=0;
+	   
+	   for(;i<getRowsCount();i++) 
+	   {
+		   addPropriete(i);
+	   }
+   }
+   
+   
+   
+   public int getNbrPersonnes()
+   {
+	   
+	   return personnes.size();
    }
    
    /**

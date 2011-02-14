@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 
 import jxl.Cell;
@@ -20,6 +19,34 @@ import jxl.read.biff.BiffException;
  */
 
 public class ConvertToCsv {
+
+	public String getInput_xls() {
+		return input_xls;
+	}
+
+	public void setInput_xls(String input_xls) {
+		this.input_xls = input_xls;
+	}
+
+	public File getInput() {
+		return input;
+	}
+
+	public void setInput(File input) {
+		this.input = input;
+	}
+
+	public File getOutput() {
+		return output;
+	}
+
+	public void setOutput(File output) {
+		this.output = output;
+	}
+
+	public String getOutput_csv() {
+		return output_csv;
+	}
 
 	private final String output_csv = "output.csv";
 	private String input_xls = "export.xls"; // Excel document to be imported

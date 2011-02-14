@@ -2,7 +2,6 @@ package csv;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 
 /*@authors Mohamed MEDARHRI
  * 
@@ -11,11 +10,12 @@ public class TestCSVManager {
 
 	public static void main(String[] args)
 	{	try {
-		String name_csv = "test.csv";
+		String name_csv = "output.csv";
 		String path_csv = System.getProperty("user.dir")+"/"+name_csv;
+		 System.out.println("path_csv :"+path_csv);
 		  
 		CSVManager csv = new CSVManager(new File(path_csv));
-        int row =23;
+        int row =2;
 		
 		 System.out.println("row count :"+csv.getRowsCount());
 		 String nom = csv.getname(row);
@@ -27,17 +27,24 @@ public class TestCSVManager {
 		 String heure_audition = csv.getHeureAudition(row);
 		 String site_audition = csv.getSiteAudition(row);
 		 
-		 //for(int i=0;i<csv.getRowsCount();i++)
-		// {
-		 System.out.println("row :"+row);
-		 System.out.println("nom :"+nom);
-		 System.out.println("prenom :"+prenom);
-		 System.out.println("provenance :"+provenance);
-		 System.out.println("filiere de provenance :"+filiere_provenance);
-		 System.out.println("filiere Ensisa :"+filiere);
-		 System.out.println("date_audition :"+date_audition);
-		 System.out.println("heure_audition :"+heure_audition);
-		 System.out.println("site_audition :"+site_audition);
+		for(int i=2;i<csv.getRowsCount();i++)
+		 {
+		 System.out.println("row :"+i);
+		 System.out.println("nom :"+csv.getname(i));
+		 System.out.println("prenom :"+csv.getprenom(i));
+		 System.out.println("provenance :"+csv.getProvenance(i));
+		 System.out.println("filiere de provenance :"+csv.getFiliereProvenance(i));
+		 System.out.println("filiere Ensisa :"+csv.getFiliere(i));
+		 System.out.println("date_audition :"+csv.getDateAudition(i));
+		 System.out.println("heure_audition :"+csv.getHeureAudition(i));
+		 System.out.println("site_audition :"+csv.getSiteAudition(i));
+		 
+		// csv.createAndPersitPersonnes();
+		 
+		 }
+		
+		 //System.out.println("nbr de personnes :"+csv.getNbrPersonnes());
+
 		 
 		 /*System.out.println("row 3 name "+nom);
 		 System.out.println("row 3 numero-dossier "+numero_dossier);

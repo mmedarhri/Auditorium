@@ -35,8 +35,6 @@ public class Audition implements Serializable {
 	private ArrayList<Personne> jury;
 	
 	
-	//private int duree;
-
 	public Audition(Personne candidat,Demi_Journee demi_journee) {
 		this.demi_journee = demi_journee;
 		this.candidat=candidat;
@@ -67,21 +65,14 @@ public class Audition implements Serializable {
 	
 	}
 
-	/*public int getHeure_debut() {
-		return this.demi_journee.get();
-	}
-*/
+
 	public void setdebut(int heure, int minutes) {
 	  this.demi_journee.setTime(heure, minutes);
 	}
-
-/*	public int getHeure_fin() {
-		return this.demi_journee.getHours();
-	}
-*/
+	
 	public void setfin(int heure, int minutes) {
-		//this.demi_journee.setDebut(heure, minutes);	
-	}
+		  this.demi_journee.setTime(heure, minutes);
+		}
 
 	public void setCandidat(Personne personne) {
 		this.candidat = personne;
@@ -120,8 +111,6 @@ public class Audition implements Serializable {
 		Demi_Journee dj1 = new Demi_Journee(date_debut, Demi_Journee.matin);
 		Demi_Journee dj2 = new Demi_Journee(date_debut, Demi_Journee.apresmidi);
 		
-		//dj1.setDebut(8, 45);
-
 		Propriete candidat1 = new Propriete(Propriete.Monsieur, "medarhri",
 				"mohamed", "m.medarhri@gmail.com", "0617115650");
 		Propriete prp12 = new Propriete(Propriete.Monsieur, "thomas",

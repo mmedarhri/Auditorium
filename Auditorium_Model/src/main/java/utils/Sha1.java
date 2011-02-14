@@ -5,6 +5,9 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/*@authors Mohamed MEDARHRI
+ * 
+ */
 
 public class Sha1 {
     public static String hash(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {

@@ -1,21 +1,9 @@
 package core;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Iterator;
-import java.util.List;
 
-import javax.jdo.Extent;
-import javax.jdo.JDOHelper;
-import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
-import javax.jdo.Query;
-import javax.jdo.Transaction;
-import javax.jdo.annotations.Discriminator;
-import javax.jdo.annotations.DiscriminatorStrategy;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Inheritance;
@@ -28,7 +16,7 @@ import javax.jdo.annotations.Persistent;
  */
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-@Inheritance(strategy = InheritanceStrategy.SUBCLASS_TABLE)
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 public class Personne extends Ressource implements Serializable {
 
 	/**
@@ -46,12 +34,17 @@ public class Personne extends Ressource implements Serializable {
 		this.affiliation = affiliation;
 		disponibilites = new ArrayList<Demi_Journee>();
 		}
+	
+	public Personne(Propriete proprietes) {
+		this.proprietes = proprietes;
+		disponibilites = new ArrayList<Demi_Journee>();
+	}
 
 	@Override
 	public String toString() {
 		return "\nPersonne \n[" + proprietes.toString() + "\nAffiliation="
-				+ affiliation.getAffiliation() + "\nDisponibilites="
-				+ disponibilites.toString() + "\n]";
+				+ affiliation + "\nDisponibilites="
+				+ disponibilites + "\n]";
 	}
 
 	public Propriete getProprietes() {

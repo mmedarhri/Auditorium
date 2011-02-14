@@ -1,7 +1,8 @@
-/* Une classe pour tester les differentes technologies  a  utiliser pour le projet 3A Hbase*/
 package core;
 
 import javax.jdo.annotations.*;
+
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 
 
@@ -14,7 +15,10 @@ import javax.jdo.annotations.*;
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 @Inheritance(strategy=InheritanceStrategy.UNSPECIFIED)
 @Discriminator(strategy=DiscriminatorStrategy.NONE)
-public class User {
+public class User implements IsSerializable  {
+
+
+
 
 @Persistent(primaryKey = "true", valueStrategy = IdGeneratorStrategy.UNSPECIFIED)
 protected String login = null;
@@ -46,7 +50,7 @@ protected static String roles[]={STUDENT,AUDITOR,SCHOOL_DIRECTION,SYSADMIN};
 
 
 public User(String login, String password,String role) {
-
+   // super();
 	this.login=login;
 	this.password=password;
 	this.role=role;
@@ -59,8 +63,8 @@ public int getAge() {
 
 
 
-public void setAge(int age) {
-	this.age = age;
+public void setAge(String age) {
+	this.age = Integer.parseInt(age);
 }
 
 
@@ -155,6 +159,13 @@ public String getRole() {
 
 public void setRole(String role) {
 	this.role = role;
+}
+@Override
+public String toString() {
+	return "User [login=" + login + ", password=" + password + ", role="
+			+ role + ", name=" + name + ", firstname=" + firstname
+			+ ", email=" + email + ", address=" + address + ", age=" + age
+			+ "]";
 }
 
 }

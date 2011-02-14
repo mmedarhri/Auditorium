@@ -1,20 +1,10 @@
 package core;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
 
-import javax.jdo.Extent;
-import javax.jdo.JDOHelper;
-import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
-import javax.jdo.Query;
-import javax.jdo.Transaction;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Inheritance;
@@ -154,11 +144,11 @@ public class Salle extends Ressource implements Serializable{
 
 		Salle salle1 = new Salle(Salle.sites.Lumiere.name(),
 				Salle.numeros.E25.name(), Salle.floors.First.name());
-		Salle salle2 = new Salle(Salle.sites.Lumiere.name(),
+		/*Salle salle2 = new Salle(Salle.sites.Lumiere.name(),
 				Salle.numeros.E23.name(), Salle.floors.First.name());
 		Salle salle3 = new Salle(Salle.sites.Lumiere.name(),
 				Salle.numeros.E32.name(), Salle.floors.Second.name());
-
+			*/
 		 System.out.println(salle1.toString());
 		
 

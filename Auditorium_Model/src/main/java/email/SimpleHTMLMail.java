@@ -5,6 +5,10 @@ import javax.mail.internet.*;
 
 import java.util.Properties;
 
+
+/*@authors Mohamed MEDARHRI
+ * 
+ */
 class SimpleHTMLMail {
     public static void main(String[] args) throws Exception{
       Properties props = new Properties();

@@ -7,6 +7,9 @@ import javax.activation.DataHandler;
 
 import java.util.Properties;
 
+/*@authors Mohamed MEDARHRI
+ * 
+ */
 class SimpleMailWithAttachment {
     public static void main(String[] args) throws Exception{
       boolean debug = false;

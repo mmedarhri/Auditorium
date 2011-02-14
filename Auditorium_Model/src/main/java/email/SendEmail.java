@@ -5,6 +5,9 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import javax.activation.*;
 
+/*@authors Mohamed MEDARHRI
+ * 
+ */
 public class SendEmail
 {
    public static void main(String [] args)

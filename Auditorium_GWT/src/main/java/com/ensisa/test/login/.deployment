@@ -1,0 +1,5 @@
+#Fri Jan 14 09:21:57 CET 2011
+war.name=Login.war
+compiler.style=DETAILED
+server.path=/home/mmedarhri/T\u00E9l\u00E9chargements/apache-tomcat-6.0.29/webapps
+compiler.memory.max=128m

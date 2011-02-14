@@ -13,13 +13,13 @@ public class Industrie extends Affiliation {
 
 	private ArrayList<Filiere> filieres;
 	private String name="Industrie";
-	private String adress;
+	private String address;
 	private String affiliation;
 	
-	public Industrie(String name,String adress) {
+	public Industrie(String name,String address) {
 		this.name=name;
 		this.affiliation="Industrie";
-		this.adress=adress;
+		this.address=address;
 		this.filieres= new ArrayList<Filiere>();
 	}
 	
@@ -61,6 +61,22 @@ public class Industrie extends Affiliation {
 	}
 	
 	
+
+	public ArrayList<Filiere> getFilieres() {
+		return filieres;
+	}
+
+	public void setFilieres(ArrayList<Filiere> filieres) {
+		this.filieres = filieres;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	@Override
 	public String getAffiliation() {

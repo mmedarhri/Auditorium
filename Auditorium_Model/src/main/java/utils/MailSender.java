@@ -24,6 +24,9 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 
+/*@authors Mohamed MEDARHRI
+ * 
+ */
 
 public class MailSender {
     
@@ -65,9 +68,6 @@ public class MailSender {
             }
         }
 
-  
-
-    
     // Autres constructeurs
     public MailSender(final String host, final String userName,
             final String password, final boolean ssl) {

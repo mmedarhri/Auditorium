@@ -2,7 +2,6 @@ package core;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -33,6 +32,30 @@ public class Session {
 	@Persistent
 	private ArrayList<Audition> auditions;
 	private Audition audition;
+
+	public ArrayList<Demi_Journee> getDemijournees() {
+		return demijournees;
+	}
+
+	public void setDemijournees(ArrayList<Demi_Journee> demijournees) {
+		this.demijournees = demijournees;
+	}
+
+	public Audition getAudition() {
+		return audition;
+	}
+
+	public void setAudition(Audition audition) {
+		this.audition = audition;
+	}
+
+	public void setRessources(ArrayList<Ressource> ressources) {
+		this.ressources = ressources;
+	}
+
+	public void setAuditions(ArrayList<Audition> auditions) {
+		this.auditions = auditions;
+	}
 
 	public Session(String name, Date date_debut,
 			Date date_fin, Affiliation affiliation) {
@@ -134,6 +157,7 @@ public class Session {
 		return buff.toString();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public String toString() {
 		return "Session \n[name=" + name + "\nDate_debut ="
@@ -158,6 +182,7 @@ public class Session {
 	}
 
 
+	@SuppressWarnings({ "unused", "deprecation" })
 	public static void main(String[] args) {
 
 		

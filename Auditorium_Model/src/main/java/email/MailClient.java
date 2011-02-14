@@ -1,6 +1,11 @@
 package email;
 
 import javax.mail.*;
+
+/*@authors Mohamed MEDARHRI
+ * 
+ */
+
 import javax.mail.internet.*;
 import javax.activation.*;
 import java.io.*;
